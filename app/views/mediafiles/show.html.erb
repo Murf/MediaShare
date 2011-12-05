@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @mediafile.title %>
+</p>
+
+<p>
+  <b>Filename:</b>
+  <%= @mediafile.filename %>
+</p>
+
+<p>
+  <b>Relativepath:</b>
+  <%= @mediafile.relativepath %>
+</p>
+
+
+<%= link_to 'Edit', edit_mediafile_path(@mediafile) %> |
+<%= link_to 'Back', mediafiles_path %>
