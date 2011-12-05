@@ -1,13 +1,19 @@
 class MediafilesController < ApplicationController
+
+  before_filter :confirm_logged_in,  :except => [:jsonindex]
+  before_filter :confirm_json_logged_in, :only => [:jsonindex]
+
+
   # GET /mediafiles
-  # GET /mediafiles.json
   def index
     @mediafiles = Mediafile.all
+  end
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @mediafiles }
-    end
+   # GET /mediafiles/index.json
+  def jsonindex
+    #@mediafiles = Mediafile.all
+    @mediafiles = Mediafile.first
+    render json: @mediafiles
   end
 
   # GET /mediafiles/1
