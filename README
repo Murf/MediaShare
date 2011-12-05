@@ -1,0 +1,8 @@
+What is MediaShare?
+
+MediaShare is a ruby on rails application, that stores a list of media, ie music, movies, tv shows.
+A user who is given access can maintain a list of their media
+Other users can request sharing of these media files.
+
+The MediaShare App operates in conjunction with a client app that maintains the database list
+of media and facilitates copying to external media for transfer / sharing
