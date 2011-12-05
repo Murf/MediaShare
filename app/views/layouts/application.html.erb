@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mediashare</title>
+  <title>Moviesync</title>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+<% if !flash[:notice].blank? %>
+<div class="notice">
+  <%= flash[:notice] %>
+</div>
+<% end %>
 
 <%= yield %>
 
