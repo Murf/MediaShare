@@ -59,6 +59,18 @@ class MediafilesController < ApplicationController
     end
   end
 
+  # PUT /mediafiles/insert.json
+
+  def insert
+    @mediafile = Mediafile.new(:filename => params[:filename])
+    if @mediafile.save
+      render json: {:result => "ok"}
+    else
+      render json: {:result => "error"}
+    end
+  end
+
+
   # PUT /mediafiles/1
   # PUT /mediafiles/1.json
   def update

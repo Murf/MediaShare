@@ -8,6 +8,10 @@ Mediashare::Application.routes.draw do
 
   match 'mediafiles/index.json', :to => 'mediafiles#jsonindex'
 
+  match 'mediafiles/insert.json', :to => 'mediafiles#insert'
+
+
+
   resources :mediafiles
 
   # The priority is based upon order of creation:
