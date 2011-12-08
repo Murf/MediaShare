@@ -1,5 +1,4 @@
-require 'active_record/Fixtures'
-
+require 'active_record/fixtures'
 namespace :db do
   desc "Seed the database with once/ and always/ fixtures."
   task :seed => :environment do
