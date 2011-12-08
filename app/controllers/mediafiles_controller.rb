@@ -62,7 +62,7 @@ class MediafilesController < ApplicationController
   # PUT /mediafiles/insert.json
 
   def insert
-    @mediafile = Mediafile.new(:filename => params[:filename], :relativepath => params[:relativepath], :local_id => params[:localid])
+    @mediafile = Mediafile.new(:filename => params[:filename], :relativepath => params[:relativepath], :remote_id => params[:remoteid])
     if @mediafile.save
       render json: {:result => "ok"}
     else
