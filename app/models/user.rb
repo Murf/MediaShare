@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
   EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
 
   # new "sexy" validations
-  validates :first_name, :presence => true, :length => { :maximum => 25 }
-  validates :last_name, :presence => true, :length => { :maximum => 50 }
+  validates :firstname, :presence => true, :length => { :maximum => 25 }
+  validates :lastname, :presence => true, :length => { :maximum => 50 }
   validates :username, :length => { :within => 3..25 }, :uniqueness => true
   validates :level, :presence => true
   validates_numericality_of :level, :only_integer => true, :message => "can only be whole number."
@@ -22,13 +22,13 @@ class User < ActiveRecord::Base
   before_save :create_hashed_password
   after_save :clear_password
 
-  scope :named, lambda {|first,last| where(:first_name => first, :last_name => last)}
-  scope :sorted, order("users.last_name ASC, users.first_name ASC")
+  scope :named, lambda {|first,last| where(:firstname => first, :lastname => last)}
+  scope :sorted, order("users.lastname ASC, users.firstname ASC")
 
   attr_protected :hashed_password, :salt
 
   def name
-    "#{first_name} #{last_name}"
+    "#{firstname} #{lastname}"
   end
 
   def self.authenticate(username="", password="")

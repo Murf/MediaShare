@@ -22,7 +22,7 @@ class MediafilesController < ApplicationController
     @mediafile = Mediafile.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # delete.html.erb
       format.json { render json: @mediafile }
     end
   end
