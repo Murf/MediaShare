@@ -11,16 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111209012250) do
+ActiveRecord::Schema.define(:version => 20111205032913) do
 
   create_table "mediafiles", :force => true do |t|
     t.string   "filename"
     t.string   "relativepath"
+    t.integer  "remote_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "remote_id",    :default => 0
-    t.integer  "user_id",      :default => 0
   end
+
+  add_index "mediafiles", ["remote_id"], :name => "index_mediafiles_on_remote_id"
+  add_index "mediafiles", ["user_id"], :name => "index_mediafiles_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "username"
