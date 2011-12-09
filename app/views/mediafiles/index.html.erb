@@ -2,9 +2,10 @@
 
 <table>
   <tr>
-    <th>Title</th>
     <th>Filename</th>
     <th>Relativepath</th>
+    <th>remoteID</th>
+     <th>userID</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,9 +13,10 @@
 
 <% @mediafiles.each do |mediafile| %>
   <tr>
-    <td><%= mediafile.title %></td>
     <td><%= mediafile.filename %></td>
     <td><%= mediafile.relativepath %></td>
+    <td><%= mediafile.remote_id %></td>
+    <td><%= mediafile.user_id %></td>
     <td><%= link_to 'Show', mediafile %></td>
     <td><%= link_to 'Edit', edit_mediafile_path(mediafile) %></td>
     <td><%= link_to 'Destroy', mediafile, confirm: 'Are you sure?', method: :delete %></td>

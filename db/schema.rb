@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111208222452) do
+ActiveRecord::Schema.define(:version => 20111209012250) do
 
   create_table "mediafiles", :force => true do |t|
     t.string   "filename"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20111208222452) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "remote_id",    :default => 0
+    t.integer  "user_id",      :default => 0
   end
 
   create_table "users", :force => true do |t|
