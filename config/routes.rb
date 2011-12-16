@@ -1,5 +1,7 @@
 Mediashare::Application.routes.draw do
 
+  resources :media
+
   match 'admin', :to => 'access#menu'
 
   match 'login.json', :to => 'access#jsonlogin'

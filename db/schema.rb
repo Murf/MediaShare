@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111205032913) do
+ActiveRecord::Schema.define(:version => 20111216062426) do
+
+  create_table "media", :force => true do |t|
+    t.string   "title"
+    t.integer  "type"
+    t.string   "genre"
+    t.integer  "imdb_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "mediafiles", :force => true do |t|
     t.string   "filename"
@@ -20,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20111205032913) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "media_id"
   end
 
   add_index "mediafiles", ["remote_id"], :name => "index_mediafiles_on_remote_id"
