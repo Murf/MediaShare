@@ -50,4 +50,11 @@ class UsersController < ApplicationController
     redirect_to(:action => 'list')
   end
 
+  #media funcionality for users
+
+  #show all discovered mdeiafiles that are not assigned to medium
+  def pending
+    @mediafiles = Mediafile.all(:conditions => 'media_id IS NULL')
+  end
+
 end

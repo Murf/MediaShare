@@ -12,23 +12,18 @@
   <% end %>
 
    <div class="field">
-    <%= f.label :filename %><br />
-    <%= f.text_field :filename %>
+    <b>Filename:</b>
+    <%= @mediafile.filename %>
   </div>
   <div class="field">
-    <%= f.label :relativepath %><br />
-    <%= f.text_field :relativepath %>
-  </div>
-  <div class="field">
-    <%= f.label :remote_id %><br />
-    <%= f.text_field :remote_id %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.text_field :user_id %>
+     <%= f.label(:media_id, "User") %>
+        <div class="input">
+           <td><%= f.select(:medium, @search.movies.collect {|m| [m.title, m.id]}) %></td>
+        </div>
   </div>
 
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Tag"%>
   </div>
 <% end %>

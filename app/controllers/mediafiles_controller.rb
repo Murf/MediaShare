@@ -41,6 +41,7 @@ class MediafilesController < ApplicationController
   # GET /mediafiles/1/edit
   def edit
     @mediafile = Mediafile.find(params[:id])
+    @search = Imdb::Search.new(@mediafile.filename)
   end
 
   # POST /mediafiles
@@ -75,9 +76,12 @@ class MediafilesController < ApplicationController
   # PUT /mediafiles/1.json
   def update
     @mediafile = Mediafile.find(params[:id])
-
-    respond_to do |format|
-      if @mediafile.update_attributes(params[:mediafile])
+    imdb =Imdb::Movie.new(params[:mediafile][:medium])
+    medium =Medium.new(:imdb_id=>params[:mediafile][:medium],:title=>imdb.title)
+    medium.save
+    @mediafile.media_id=medium.id
+        respond_to do |format|
+      if @mediafile.save
         format.html { redirect_to @mediafile, notice: 'Mediafile was successfully updated.' }
         format.json { head :ok }
       else
@@ -85,6 +89,7 @@ class MediafilesController < ApplicationController
         format.json { render json: @mediafile.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # DELETE /mediafiles/1
