@@ -1,40 +1,19 @@
-<p id="notice"><%= notice %></p>
+<% @page_title = "Delete User: #{@user.name}" %>
 
-<p>
-  <b>Username:</b>
-  <%= @user.username %>
-</p>
+<%= link_to("<< Back to List", {:action => 'list'}, :class => 'back-link') %>
 
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
+<div class="user delete">
+  <h2>Delete User</h2>
+  
+  <%= form_for(:user, :url => {:action => 'destroy', :id => @user.id}) do |f| -%>
 
-<p>
-  <b>Firstname:</b>
-  <%= @user.firstname %>
-</p>
-
-<p>
-  <b>Lastname:</b>
-  <%= @user.lastname %>
-</p>
-
-<p>
-  <b>Hashed password:</b>
-  <%= @user.hashed_password %>
-</p>
-
-<p>
-  <b>Salt:</b>
-  <%= @user.salt %>
-</p>
-
-<p>
-  <b>Level:</b>
-  <%= @user.level %>
-</p>
-
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+    <p>Are you sure you want to permanently delete this user?</p>
+  
+    <p class="reference-name"><%= @user.name %></p>
+  
+    <div class="form-buttons">
+      <%= submit_tag("Delete User") %>
+    </div>
+    
+  <% end %>
+</div>
