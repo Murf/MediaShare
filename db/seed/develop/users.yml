@@ -4,6 +4,8 @@ defaultuser:
     email: "user@nowhere.com"
     firstname: "John"
     lastname: "Doe"
-    hashed_password: "9a9b307f35823ff722354db10b30147137503b60"
-    salt: "68961d5e65f74fbc7eb6e68271d709594cd9e158"
+    hashed_password: "bc09ab33e9229f1b4e3fb94ffcf2ca9ef4a6d528"
+    salt: "5eb43d884e463e83d941a2750acfa8610b4cd2af"
     level: 9
+
+    #password is secret
