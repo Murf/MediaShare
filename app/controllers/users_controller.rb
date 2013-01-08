@@ -1,53 +1,40 @@
+
 class UsersController < ApplicationController
+  before_filter :authenticate_user!
 
-  before_filter :confirm_logged_in
-  before_filter :confirm_admin
-  
   def index
-    list
-    render('list')
-  end
-  
-  def list
-    @users = User.sorted
+    authorize! :index, User, :message => 'Not authorized to index'
+    @users = User.accessible_by(current_ability)
   end
 
-  def new
-    @user = User.new
-  end
-  
-  def create
-    @user = User.new(params[:user])
-    if @user.save
-      flash[:notice] = 'User created.'
-      redirect_to(:action => 'list')
-    else
-      render("new")
-    end
-  end
-
-  def edit
+  def show
+    authorize! :index, User, :message => 'Not authorized to show'
     @user = User.find(params[:id])
   end
-  
+
   def update
+    authorize! :update, User, :message => 'Not authorized to update'
     @user = User.find(params[:id])
-    if @user.update_attributes(params[:user])
-      flash[:notice] = 'User updated.'
-      redirect_to(:action => 'list')
+    if @user.update_attributes(params[:user], :as => :admin)
+      redirect_to users_path, :notice => "User updated."
     else
-      render("edit")
+      redirect_to users_path, :alert => "Unable to update user."
     end
-  end
-
-  def delete
-    @user = User.find(params[:id])
   end
 
   def destroy
-    User.find(params[:id]).destroy
-    flash[:notice] = "User destroyed."
-    redirect_to(:action => 'list')
+    authorize! :destroy, @user, :message => 'Not authorized to destroy'
+    user = User.find(params[:id])
+    unless user == current_user
+      @inventories = Inventory.where(:user_id => user.id)
+      @inventories.each do |inventory|
+        inventory.destroy
+      end
+      user.destroy
+      redirect_to users_path, :notice => "User deleted."
+    else
+      redirect_to users_path, :notice => "Can't delete yourself."
+    end
   end
 
   #media funcionality for users

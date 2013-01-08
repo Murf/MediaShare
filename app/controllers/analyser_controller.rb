@@ -1,5 +1,5 @@
 class AnalyserController < ApplicationController
-  before_filter :confirm_logged_in
+  before_filter :authenticate_user!
 
   def analyse
     mediafiles = Mediafile.all

@@ -1,6 +1,6 @@
 class MediaController < ApplicationController
 
-  before_filter :confirm_logged_in
+  before_filter :authenticate_user!
 
   # GET /media
   # GET /media.json

@@ -1,7 +1,6 @@
 class MediafilesController < ApplicationController
 
-  before_filter :confirm_logged_in,  :except => [:jsonindex]
-  before_filter :confirm_json_logged_in, :only => [:jsonindex]
+  before_filter :authenticate_user!
 
 
   # GET /mediafiles

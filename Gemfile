@@ -43,3 +43,7 @@ end
 
 
 gem "bootstrap-sass"
+gem "devise"
+gem "cancan"
+gem 'simple_form'
+gem "rolify"

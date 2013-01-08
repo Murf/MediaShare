@@ -1,12 +1,8 @@
 Mediashare::Application.routes.draw do
 
+  devise_for :users
+
   resources :media
-
-  match 'admin', :to => 'access#menu'
-
-  match 'login.json', :to => 'access#jsonlogin'
-
-  match 'logout.json', :to => 'access#jsonlogout'
 
   match 'mediafiles/index.json', :to => 'mediafiles#jsonindex'
 
@@ -15,5 +11,7 @@ Mediashare::Application.routes.draw do
   resources :mediafiles
 
    match ':controller(/:action(/:id(.:format)))'
+  root :to => "mediafiles#index"
+
 
 end

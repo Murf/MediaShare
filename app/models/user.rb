@@ -1,73 +1,30 @@
-require 'digest/sha1'
 class User < ActiveRecord::Base
-  has_many :mediafiles
+  belongs_to :group
+  belongs_to :craft
+  has_many :items, :through => :inventories
+  rolify
+  before_save :check_role
+  default_scope :order => "firstname ASC"
 
-  attr_accessor :password
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
-  EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :role_ids, :group_id, :craft_id,:level, :as => :admin
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :firstname, :lastname, :group, :group_id, :craft, :craft_id, :level
+  # attr_accessible :title, :body
 
-  # new "sexy" validations
-  validates :firstname, :presence => true, :length => { :maximum => 25 }
-  validates :lastname, :presence => true, :length => { :maximum => 50 }
-  validates :username, :length => { :within => 3..25 }, :uniqueness => true
-  validates :level, :presence => true
-  validates_numericality_of :level, :only_integer => true, :message => "can only be whole number."
-  validates_inclusion_of :level, :in => 1..9, :message => "can only be between 1 and 9."
-  validates :email, :presence => true, :length => { :maximum => 100 },
-    :format => EMAIL_REGEX, :confirmation => true
-
-  # only on create, so other attributes of this user can be changed
-  validates_length_of :password, :within => 3..25, :on => :create
-
-  before_save :create_hashed_password
-  after_save :clear_password
-
-  scope :named, lambda {|first,last| where(:firstname => first, :lastname => last)}
-  scope :sorted, order("users.lastname ASC, users.firstname ASC")
-
-  attr_protected :hashed_password, :salt
-
-  def name
+  def fullname
     "#{firstname} #{lastname}"
   end
 
-  def self.authenticate(username="", password="")
-    user = User.find_by_username(username)
-    if user && user.password_match?(password)
-      return user
-    else
-      return false
-    end
-  end
-
-  # The same password string with the same hash method and salt
-  # should always generate the same hashed_password.
-  def password_match?(password="")
-    hashed_password == User.hash_with_salt(password, salt)
-  end
-
-  def self.make_salt(username="")
-    Digest::SHA1.hexdigest("Use #{username} with #{Time.now} to make salt")
-  end
-
-  def self.hash_with_salt(password="", salt="")
-    Digest::SHA1.hexdigest("Put #{salt} on the #{password}")
-  end
-
   private
-
-  def create_hashed_password
-    # Whenever :password has a value hashing is needed
-    unless password.blank?
-      # always use "self" when assigning values
-      self.salt = User.make_salt(username) if salt.blank?
-      self.hashed_password = User.hash_with_salt(password, salt)
+  def check_role
+    if !roles.any?
+      add_role :user
     end
-  end
-
-  def clear_password
-    # for security and b/c hashing is not needed
-    self.password = nil
   end
 
 end
