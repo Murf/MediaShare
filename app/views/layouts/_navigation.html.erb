@@ -11,7 +11,13 @@
   <% end %>
   <% if user_signed_in? %>
       <li>
-        <%= link_to('My Media', '/mediafiles')  %>
+        <%= link_to('My Files', '/mediafiles')  %>
+      </li>
+      <li>
+        <%= link_to('My Media', '/media')  %>
+      </li>
+      <li>
+        <%= link_to('Analyse Files', '/analyser/analyse')  %>
       </li>
 
       <% if (current_user.has_role? :admin) %>

@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
-  belongs_to :group
-  belongs_to :craft
-  has_many :items, :through => :inventories
+  has_many :mediafiles
   rolify
   before_save :check_role
   default_scope :order => "firstname ASC"

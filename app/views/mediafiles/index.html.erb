@@ -1,29 +1,27 @@
-<h1>Listing mediafiles</h1>
+<h3>Media Files</h3>
+<div class="span8">
+  <table class="table table-condensed">
+    <thead>
+        <tr>
+          <th>Filename</th>
+          <th>Relativepath</th>
+          <th>remoteID</th>
+          <th>User</th>
+          <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @mediafiles.each do |mediafile| %>
+        <tr>
+          <td><%= link_to mediafile.filename, mediafile %></td>
+          <td><%= mediafile.relativepath %></td>
+          <td><%= mediafile.remote_id %></td>
+          <td><%= link_to mediafile.user.fullname, mediafile.user %></td>
+          <td><%= link_to("Delete", mediafile_path(mediafile), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini')  %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'New Mediafile', new_mediafile_path, :class => 'btn btn-mini' %>
+</div>
 
-<table>
-  <tr>
-    <th>Filename</th>
-    <th>Relativepath</th>
-    <th>remoteID</th>
-     <th>userID</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @mediafiles.each do |mediafile| %>
-  <tr>
-    <td><%= mediafile.filename %></td>
-    <td><%= mediafile.relativepath %></td>
-    <td><%= mediafile.remote_id %></td>
-    <td><%= mediafile.user_id %></td>
-    <td><%= link_to 'Show', mediafile %></td>
-    <td><%= link_to 'Edit', edit_mediafile_path(mediafile) %></td>
-    <td><%= link_to 'Destroy', mediafile, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Mediafile', new_mediafile_path %>

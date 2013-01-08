@@ -1,29 +1,27 @@
-<h1>Listing media</h1>
+<h3>Media</h3>
+<div class="span8">
+  <table class="table table-condensed">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Type</th>
+      <th>Genre</th>
+      <th>Imdb ID</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @media.each do |medium| %>
+        <tr>
+          <td><%= link_to medium.title, medium %></td>
+          <td><%= medium.type %></td>
+          <td><%= medium.genre %></td>
+          <td><%= medium.imdb_id %></td>
+          <td><%= link_to("Delete", media_path(medium), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini')  %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'New Media', new_medium_path, :class => 'btn btn-mini' %>
+</div>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Type</th>
-    <th>Genre</th>
-    <th>Imdb</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @media.each do |medium| %>
-  <tr>
-    <td><%= medium.title %></td>
-    <td><%= medium.type %></td>
-    <td><%= medium.genre %></td>
-    <td><%= medium.imdb_id %></td>
-    <td><%= link_to 'Show', medium %></td>
-    <td><%= link_to 'Edit', edit_medium_path(medium) %></td>
-    <td><%= link_to 'Destroy', medium, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Medium', new_medium_path %>

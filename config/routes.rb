@@ -6,12 +6,12 @@ Mediashare::Application.routes.draw do
   resources :media
 
   match 'mediafiles/index.json', :to => 'mediafiles#jsonindex'
-
   match 'mediafiles/insert.json', :to => 'mediafiles#insert'
+  match 'mediafiles/pending', :to => 'mediafiles#pending'
 
   resources :mediafiles
 
-   match ':controller(/:action(/:id(.:format)))'
+  match ':controller(/:action(/:id(.:format)))'
   root :to => "mediafiles#index"
 
 

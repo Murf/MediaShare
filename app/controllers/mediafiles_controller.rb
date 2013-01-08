@@ -2,7 +2,6 @@ class MediafilesController < ApplicationController
 
   before_filter :authenticate_user!
 
-
   # GET /mediafiles
   def index
     @mediafiles = Mediafile.all
@@ -62,7 +61,7 @@ class MediafilesController < ApplicationController
   # PUT /mediafiles/insert.json
 
   def insert
-    @mediafile = Mediafile.new(:filename => params[:filename], :relativepath => params[:relativepath], :remote_id => params[:remoteid], :user_id => session[:user_id])
+    @mediafile = Mediafile.new(:filename => params[:filename], :relativepath => params[:relativepath], :remote_id => params[:remoteid], :user_id => current_user.id)
     if @mediafile.save
       render json: {:result => "ok"}
     else
@@ -102,4 +101,14 @@ class MediafilesController < ApplicationController
       format.json { head :ok }
     end
   end
+
+
+
+
+
+  #show all discovered mediafiles that are not assigned to medium
+  def pending
+    @mediafiles = Mediafile.all(:conditions => 'media_id IS NULL')
+  end
+
 end
