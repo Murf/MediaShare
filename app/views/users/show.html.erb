@@ -1,0 +1,6 @@
+<h3>User</h3>
+<p>Name: <%= @user.fullname %></p>
+<p>Email: <%= @user.email if @user.email %></p>
+<p>Registered: <%= @user.created_at.to_date %></p>
+
+<%= link_to 'Back', users_path %>
