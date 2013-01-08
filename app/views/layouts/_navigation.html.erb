@@ -1,0 +1,31 @@
+<%= link_to "MediaShare", root_path, :class => 'brand' %>
+<ul class="nav" xmlns="http://www.w3.org/1999/html">
+  <% if user_signed_in? %>
+      <li>
+        <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>
+      </li>
+  <% else %>
+      <li>
+        <%= link_to('Login', new_user_session_path)  %>
+      </li>
+  <% end %>
+  <% if user_signed_in? %>
+      <li>
+        <%= link_to('My Media', '/mediafiles')  %>
+      </li>
+
+      <% if (current_user.has_role? :admin) %>
+          <li>
+            <%= link_to('Users', users_url) %>
+          </li>
+      <% end %>
+
+      <li>
+        <%= link_to('Logged in: ' + current_user.fullname, edit_user_registration_path)    %>
+      </li>
+  <% else %>
+      <li>
+        <%= link_to('Sign up', new_user_registration_path)  %>
+      </li>
+  <% end %>
+</ul>
