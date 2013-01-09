@@ -5,13 +5,17 @@ class AnalyserController < ApplicationController
     mediafiles = Mediafile.all
     mediafiles.each do |mediafile|
       if (!mediafile.medium)
-        medium = Medium.new
         search = Imdb::Search.new(File.basename(mediafile.filename, '.*'))
         if search.movies[0]
-          medium.title = search.movies[0].title
-          #medium.genre = search.movies[0].genre
-          medium.imdb_id = search.movies[0].id
-          medium.save
+          imdbId= search.movies[0].id
+          medium = Medium.find_by_imdb_id(imdbId)
+          if (!medium)
+            medium = Medium.new
+            medium.title = search.movies[0].title
+            #medium.genre = search.movies[0].genre
+            medium.imdb_id = imdbId
+            medium.save
+          end
           mediafile.medium = medium
           mediafile.save
         end
