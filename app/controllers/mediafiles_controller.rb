@@ -18,10 +18,17 @@ class MediafilesController < ApplicationController
   # GET /mediafiles/1.json
   def show
     @mediafile = Mediafile.find(params[:id])
-    search = Imdb::Search.new(File.basename(@mediafile.filename, '.*'))
-    if (search.movies.count > 1)
+    name= File.basename(@mediafile.filename, '.*')
+    if (params[:query])
+      if  (params[:query][:name])
+        name = params[:query][:name]
+      end
+    end
+    search = Imdb::Search.new(name)
+    if (search.movies.count > 0)
       @movies = search.movies
     end
+    #render json: {"result" => params[:query][:name]}
     respond_to do |format|
       format.html # delete.html.erb
       format.json { render json: @mediafile }
@@ -123,8 +130,6 @@ class MediafilesController < ApplicationController
     mediafile.save
     redirect_to mediafile, notice: 'New Media selected for this Media File.'
   end
-
-
 
 
   #show all discovered mediafiles that are not assigned to medium
