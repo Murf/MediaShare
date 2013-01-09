@@ -4,7 +4,7 @@ class MediafilesController < ApplicationController
 
   # GET /mediafiles
   def index
-    @mediafiles = Mediafile.all
+    @mediafiles = Mediafile.where(:user_id => current_user.id)
   end
 
    # GET /mediafiles/index.json

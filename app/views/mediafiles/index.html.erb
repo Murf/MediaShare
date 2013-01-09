@@ -1,12 +1,10 @@
 <h3>Media Files</h3>
-<div class="span8">
+<div class="span16">
   <table class="table table-condensed">
     <thead>
         <tr>
           <th>Filename</th>
-          <th>Relativepath</th>
-          <th>remoteID</th>
-          <th>User</th>
+          <th>Media</th>
           <th></th>
         </tr>
     </thead>
@@ -14,9 +12,7 @@
     <% @mediafiles.each do |mediafile| %>
         <tr>
           <td><%= link_to mediafile.filename, mediafile %></td>
-          <td><%= mediafile.relativepath %></td>
-          <td><%= mediafile.remote_id %></td>
-          <td><%= link_to mediafile.user.fullname, mediafile.user %></td>
+          <td><%= link_to mediafile.medium.title, mediafile.medium if  mediafile.medium %></td>
           <td><%= link_to("Delete", mediafile_path(mediafile), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini')  %></td>
         </tr>
     <% end %>
