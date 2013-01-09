@@ -5,6 +5,7 @@ class CreateMediafiles < ActiveRecord::Migration
       t.string :relativepath
       t.integer :remote_id
       t.integer :user_id
+      t.integer :medium_id
       t.timestamps
     end
     add_index("mediafiles", "user_id")

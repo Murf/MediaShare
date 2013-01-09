@@ -17,7 +17,7 @@
           <td><%= medium.type %></td>
           <td><%= medium.genre %></td>
           <td><%= medium.imdb_id %></td>
-          <td><%= link_to("Delete", media_path(medium), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini')  %></td>
+          <td><%= link_to("Delete", medium_path(medium), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini')  %></td>
         </tr>
     <% end %>
     </tbody>

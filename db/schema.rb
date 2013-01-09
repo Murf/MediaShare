@@ -27,9 +27,9 @@ ActiveRecord::Schema.define(:version => 20121116021833) do
     t.string   "relativepath"
     t.integer  "remote_id"
     t.integer  "user_id"
+    t.integer  "medium_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
-    t.integer  "media_id"
   end
 
   add_index "mediafiles", ["remote_id"], :name => "index_mediafiles_on_remote_id"
