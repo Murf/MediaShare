@@ -6,6 +6,9 @@ class MediaController < ApplicationController
   # GET /media.json
   def index
     @media = Medium.all
+    if (Mediafile.includes(:medium).where('medium_id IS NULL').count > 0)
+      @unlinked_mediafiles = true
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -76,6 +79,10 @@ class MediaController < ApplicationController
   # DELETE /media/1.json
   def destroy
     @medium = Medium.find(params[:id])
+    @medium.mediafiles.each do |mediafile|
+      mediafile.medium=nil
+      mediafile.save
+    end
     @medium.destroy
 
     respond_to do |format|

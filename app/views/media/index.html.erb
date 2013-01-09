@@ -23,5 +23,8 @@
     </tbody>
   </table>
   <%= link_to 'New Media', new_medium_path, :class => 'btn btn-mini' %>
+  <%  if (@unlinked_mediafiles) %>
+      <br><br>There are unlinked Media Files
+  <% end %>
 </div>
 
