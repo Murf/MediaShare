@@ -20,6 +20,13 @@
   <%= @medium.imdb_id %>
 </p>
 
+<br>
+<h4>Linked Media Files </h4>
+
+<% @medium.mediafiles.each do |mediafile|  %>
+  <%= link_to mediafile.filename, mediafile  %> <br>
+<% end %>
+<br>
 
 <%= link_to 'Edit', edit_medium_path(@medium) %> |
 <%= link_to 'Back', media_path %>
