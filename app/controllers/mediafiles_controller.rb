@@ -18,7 +18,10 @@ class MediafilesController < ApplicationController
   # GET /mediafiles/1.json
   def show
     @mediafile = Mediafile.find(params[:id])
-
+    search = Imdb::Search.new(File.basename(@mediafile.filename, '.*'))
+    if (search.movies.count > 1)
+      @movies = search.movies
+    end
     respond_to do |format|
       format.html # delete.html.erb
       format.json { render json: @mediafile }
@@ -102,6 +105,24 @@ class MediafilesController < ApplicationController
     end
   end
 
+  #assign a new medium to mediafile
+  def select
+    mediafile = Mediafile.find(params[:id])
+    imdbId= params[:imdb_id]
+    title= params[:title]
+    #genre= params[:genre]
+    medium = Medium.find_by_imdb_id(imdbId)
+    if (!medium)
+      medium = Medium.new
+      medium.title = title
+      #medium.genre = genre
+      medium.imdb_id = imdbId
+      medium.save
+    end
+    mediafile.medium = medium
+    mediafile.save
+    redirect_to mediafile, notice: 'New Media selected for this Media File.'
+  end
 
 
 

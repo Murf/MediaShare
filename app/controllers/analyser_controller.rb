@@ -12,7 +12,7 @@ class AnalyserController < ApplicationController
           if (!medium)
             medium = Medium.new
             medium.title = search.movies[0].title
-            #medium.genre = search.movies[0].genre
+            #medium.genre = search.movies[0].genre   #genre not availble in this query need to find it elsewhere
             medium.imdb_id = imdbId
             medium.save
           end

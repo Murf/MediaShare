@@ -5,7 +5,7 @@ class MediaController < ApplicationController
   # GET /media
   # GET /media.json
   def index
-    @media = Medium.all
+    @media = Medium.includes(:mediafiles).where("mediafiles.id IS NOT NULL and mediafiles.user_id ="+current_user.id.to_s)
     if (Mediafile.includes(:medium).where('medium_id IS NULL').count > 0)
       @unlinked_mediafiles = true
     end

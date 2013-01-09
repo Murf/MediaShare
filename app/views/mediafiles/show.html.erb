@@ -11,4 +11,13 @@
 <%=  link_to @mediafile.medium.title, @mediafile.medium %>   <br>
 <br>
 
+<% if (@movies) %>
+    <h4>Alternative Media</h4>
+    <br>
+    <% @movies.each do |movie| %>
+        <%= link_to(movie.title, '/mediafiles/select/'+@mediafile.id.to_s+'?imdb_id='+movie.id+'&title='+movie.title+'&genre=')%>  <br>
+    <% end %>
+    <br><br>
+<% end %>
+
 <%= link_to 'Back', :back %>
