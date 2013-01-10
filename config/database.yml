@@ -19,7 +19,9 @@ test:
   timeout: 5000
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
-  pool: 25
-  timeout: 5000
+    adapter: mysql2
+    database: mediashare
+    pool: 25
+    username: mediashare
+    password: <%= ENV['PROD_MYSQL_PASSWORD'] %>
+
