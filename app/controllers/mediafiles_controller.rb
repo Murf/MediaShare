@@ -18,7 +18,7 @@ class MediafilesController < ApplicationController
   # GET /mediafiles/1.json
   def show
     @mediafile = Mediafile.find(params[:id])
-    name= File.basename(@mediafile.filename, '.*')
+    name= File.basename(@mediafile.filename, '.*').downcase.tr("_", " ")
     if (params[:query])
       if  (params[:query][:name])
         name = params[:query][:name]

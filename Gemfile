@@ -19,7 +19,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'imdb'
+gem 'imdb', :git => "git@github.com:Murf/imdb.git"
 gem 'jquery-rails'
 gem "bootstrap-sass"
 gem "devise"

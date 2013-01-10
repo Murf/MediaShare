@@ -5,7 +5,7 @@ class AsyncWeb
     mediafiles = Mediafile.where(:user_id => user_id)
     mediafiles.each do |mediafile|
       if (!mediafile.medium)
-        search = Imdb::Search.new(File.basename(mediafile.filename, '.*'))
+        search = Imdb::Search.new(File.basename(mediafile.filename, '.*').downcase.tr("_", " "))
         if search.movies[0]
           imdbId= search.movies[0].id
           medium = Medium.find_by_imdb_id(imdbId)
