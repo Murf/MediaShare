@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:Murf/imdb.git
+  remote: git://github.com/Murf/imdb.git
   revision: 441566154b36a04472861b00efb3fbc82bb6431e
   specs:
     imdb (0.6.8)
