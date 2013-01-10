@@ -1,3 +1,4 @@
+require 'sidekiq/web'
 Mediashare::Application.routes.draw do
 
   devise_for :users, :controllers => {:sessions => 'sessions'}
@@ -14,5 +15,6 @@ Mediashare::Application.routes.draw do
   match ':controller(/:action(/:id(.:format)))'
   root :to => "mediafiles#index"
 
+  mount Sidekiq::Web, at: "/sidekiq"
 
 end

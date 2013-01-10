@@ -28,6 +28,8 @@ gem 'simple_form'
 gem "rolify"
 gem 'heroku'
 gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
 
 
 
