@@ -13,7 +13,9 @@ Mediashare::Application.routes.draw do
   resources :mediafiles
 
   match ':controller(/:action(/:id(.:format)))'
-  root :to => "mediafiles#index"
+  authenticated :user do
+    root :to => 'home#index'
+  end
 
   mount Sidekiq::Web, at: "/sidekiq"
 

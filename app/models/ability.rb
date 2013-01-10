@@ -7,9 +7,10 @@ class Ability
       can :manage, :all
     end
 
-   # if user.has_role? :user
-
-  #  end
+    if user.has_role? :user
+      can :manage, Mediafile
+      can :manage, Medium
+    end
   end
 
 end

@@ -4,6 +4,7 @@ class MediafilesController < ApplicationController
 
   # GET /mediafiles
   def index
+    authorize! :index, Mediafile, :message => 'Not authorized to index'
     @mediafiles = Mediafile.where(:user_id => current_user.id)
   end
 
@@ -17,6 +18,7 @@ class MediafilesController < ApplicationController
   # GET /mediafiles/1
   # GET /mediafiles/1.json
   def show
+    authorize! :show, Mediafile, :message => 'Not authorized to show'
     @mediafile = Mediafile.find(params[:id])
     name= File.basename(@mediafile.filename, '.*').downcase.tr("_", " ")
     if (params[:query])
@@ -38,6 +40,7 @@ class MediafilesController < ApplicationController
   # GET /mediafiles/new
   # GET /mediafiles/new.json
   def new
+    authorize! :new, Mediafile, :message => 'Not authorized to new'
     @mediafile = Mediafile.new
 
     respond_to do |format|
@@ -48,6 +51,7 @@ class MediafilesController < ApplicationController
 
   # GET /mediafiles/1/edit
   def edit
+    authorize! :edit, Mediafile, :message => 'Not authorized to edit'
     @mediafile = Mediafile.find(params[:id])
     @search = Imdb::Search.new(@mediafile.filename)
   end
@@ -55,6 +59,7 @@ class MediafilesController < ApplicationController
   # POST /mediafiles
   # POST /mediafiles.json
   def create
+    authorize! :create, Mediafile, :message => 'Not authorized to create'
     @mediafile = Mediafile.new(params[:mediafile])
 
     respond_to do |format|
@@ -71,6 +76,7 @@ class MediafilesController < ApplicationController
   # PUT /mediafiles/insert.json
 
   def insert
+    authorize! :insert, Mediafile, :message => 'Not authorized to insert'
     @mediafile = Mediafile.new(:filename => params[:filename], :relativepath => params[:relativepath], :remote_id => params[:remoteid], :user_id => current_user.id)
     if @mediafile.save
       render json: {:result => "ok"}
@@ -83,6 +89,7 @@ class MediafilesController < ApplicationController
   # PUT /mediafiles/1
   # PUT /mediafiles/1.json
   def update
+    authorize! :update, Mediafile, :message => 'Not authorized to update'
     @mediafile = Mediafile.find(params[:id])
     imdb =Imdb::Movie.new(params[:mediafile][:medium])
     medium =Medium.new(:imdb_id=>params[:mediafile][:medium],:title=>imdb.title)
@@ -103,6 +110,7 @@ class MediafilesController < ApplicationController
   # DELETE /mediafiles/1
   # DELETE /mediafiles/1.json
   def destroy
+    authorize! :destroy, Mediafile, :message => 'Not authorized to destroy'
     @mediafile = Mediafile.find(params[:id])
     @mediafile.destroy
 
@@ -114,6 +122,7 @@ class MediafilesController < ApplicationController
 
   #assign a new medium to mediafile
   def select
+    authorize! :select, Mediafile, :message => 'Not authorized to select'
     mediafile = Mediafile.find(params[:id])
     imdbId= params[:imdb_id]
     title= params[:title]
@@ -134,6 +143,7 @@ class MediafilesController < ApplicationController
 
   #show all discovered mediafiles that are not assigned to medium
   def pending
+    authorize! :pending, Mediafile, :message => 'Not authorized to pending'
     @mediafiles = Mediafile.all(:conditions => 'media_id IS NULL')
   end
 
