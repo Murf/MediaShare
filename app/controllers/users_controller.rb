@@ -26,10 +26,6 @@ class UsersController < ApplicationController
     authorize! :destroy, @user, :message => 'Not authorized to destroy'
     user = User.find(params[:id])
     unless user == current_user
-      @inventories = Inventory.where(:user_id => user.id)
-      @inventories.each do |inventory|
-        inventory.destroy
-      end
       user.destroy
       redirect_to users_path, :notice => "User deleted."
     else
