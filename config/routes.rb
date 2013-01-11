@@ -9,6 +9,7 @@ Mediashare::Application.routes.draw do
   match 'mediafiles/index.json', :to => 'mediafiles#jsonindex'
   match 'mediafiles/insert.json', :to => 'mediafiles#insert'
   match 'mediafiles/pending', :to => 'mediafiles#pending'
+  match 'mediafiles/destroyall.json', :to => 'mediafiles#destroyall'
 
   resources :mediafiles
 

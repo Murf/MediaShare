@@ -120,6 +120,18 @@ class MediafilesController < ApplicationController
     end
   end
 
+  def destroyall
+    authorize! :destroy, Mediafile, :message => 'Not authorized to destroy'
+    @mediafiles = Mediafile.where(:user_id => current_user.id)
+    @mediafiles.each do |mediafile|
+      mediafile.destroy
+    end
+    respond_to do |format|
+      format.html { redirect_to mediafiles_url }
+      format.json { head :ok }
+    end
+  end
+
   #assign a new medium to mediafile
   def select
     authorize! :select, Mediafile, :message => 'Not authorized to select'

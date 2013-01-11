@@ -13,7 +13,7 @@
         <tr>
           <td><%= link_to mediafile.filename, mediafile %></td>
           <td><%= link_to mediafile.medium.title, mediafile.medium if  mediafile.medium %></td>
-          <td><%= link_to("Delete", mediafile_path(mediafile), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini')  %></td>
+          <td><%= link_to("Delete", mediafile_path(mediafile), :method => :delete, :class => 'btn btn-mini')  %></td>
         </tr>
     <% end %>
     </tbody>
