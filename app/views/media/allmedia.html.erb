@@ -20,7 +20,11 @@
                  if (medium.mediafiles.count == 1 && medium.mediafiles.first.user_id != current_user.id)
                    @owner = medium.mediafiles.first.user.fullname
                  elsif (medium.mediafiles.count > 1)
-                   @owner = "Multiple"
+                   if (medium.mediafiles.include?(current_user))
+                     @owner = "Me and others"
+                   else
+                     @owner = "Others"
+                   end
                  end
           %>
           <td><%= @owner %></td>
