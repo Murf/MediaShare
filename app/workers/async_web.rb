@@ -26,4 +26,13 @@ class AsyncWeb
       end
     end
   end
+
+  def rescue_action(exception)
+    puts(exception)    
+    #if ::ActionController::MissingTemplate === exception
+    #   render :text => 'rescued'
+    #else
+    #   super
+    #end
+  end
 end
