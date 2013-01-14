@@ -24,7 +24,7 @@
 <h4>Linked Media Files </h4>
 
 <% @medium.mediafiles.each do |mediafile|  %>
-  <%= link_to mediafile.filename+' in directory '+mediafile.relativepath, mediafile  %> <br>
+  <%= link_to mediafile.filename+' in directory '+mediafile.relativepath, mediafile  %>, Owner: <%=  mediafile.user.fullname %>  <br>
 <% end %>
 <br>
 
