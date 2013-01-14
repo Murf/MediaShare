@@ -17,7 +17,9 @@ Mediashare::Application.routes.draw do
 
   root :to => 'home#index'
 
-
-  mount Sidekiq::Web, at: "/sidekiq"
+  constraint = lambda { |request| request.env["warden"].authenticate? and request.env['warden'].user.has_role? "admin" }
+  constraints constraint do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
 end
