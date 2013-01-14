@@ -21,6 +21,16 @@ class MediaController < ApplicationController
     end
   end
 
+  def allmedia
+    authorize! :index, Medium, :message => 'Not authorized to index'
+    @media = Medium.includes(:mediafiles).where("mediafiles.id IS NOT NULL")
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @media }
+    end
+  end
+
   # GET /media/1
   # GET /media/1.json
   def show

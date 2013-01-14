@@ -4,6 +4,7 @@ Mediashare::Application.routes.draw do
   devise_for :users, :controllers => {:sessions => 'sessions'}
   resources :users
 
+  match 'media/allmedia', :to => 'media#allmedia'
   resources :media
 
   match 'mediafiles/index.json', :to => 'mediafiles#jsonindex'
