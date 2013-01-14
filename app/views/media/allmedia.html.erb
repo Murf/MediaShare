@@ -1,5 +1,5 @@
 <h3>All Media</h3>
-<div class="span8">
+<div class="span16">
   <table class="table table-condensed">
     <thead>
     <tr>
@@ -8,7 +8,6 @@
       <th>Genre</th>
       <th>Owner</th>
       <th>Imdb ID</th>
-      <th></th>
     </tr>
     </thead>
     <tbody>
@@ -26,7 +25,6 @@
           %>
           <td><%= @owner %></td>
           <td><%= medium.imdb_id %></td>
-          <td><%= link_to("Delete", medium_path(medium), :method => :delete, :class => 'btn btn-mini')  %></td>
         </tr>
     <% end %>
     </tbody>
