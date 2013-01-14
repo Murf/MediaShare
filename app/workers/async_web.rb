@@ -2,7 +2,12 @@ class AsyncWeb
   include Sidekiq::Worker
 
   def perform(user_id)
-    mediafiles = Mediafile.where(:user_id => user_id)
+    if (User.find(user_id).has_role? "admin")
+      mediafiles = Mediafile.all
+    else
+      mediafiles = Mediafile.where(:user_id => user_id)
+    end
+
     mediafiles.each do |mediafile|
       if (!mediafile.medium)
         search = Imdb::Search.new(File.basename(mediafile.filename, '.*').downcase.tr("_", " "))
