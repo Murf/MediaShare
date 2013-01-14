@@ -6,7 +6,11 @@ class MediaController < ApplicationController
   # GET /media.json
   def index
     authorize! :index, Medium, :message => 'Not authorized to index'
-    @media = Medium.includes(:mediafiles).where("mediafiles.id IS NOT NULL and mediafiles.user_id ="+current_user.id.to_s)
+    if (current_user.has_role? "admin")
+      @media = Medium.includes(:mediafiles).where("mediafiles.id IS NOT NULL")
+    else
+      @media = Medium.includes(:mediafiles).where("mediafiles.id IS NOT NULL and mediafiles.user_id ="+current_user.id.to_s)
+    end
     if (Mediafile.includes(:medium).where('medium_id IS NULL').count > 0)
       @unlinked_mediafiles = true
     end

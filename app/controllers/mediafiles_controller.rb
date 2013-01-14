@@ -6,7 +6,11 @@ class MediafilesController < ApplicationController
   # GET /mediafiles
   def index
     authorize! :index, Mediafile, :message => 'Not authorized to index'
-    @mediafiles = Mediafile.where(:user_id => current_user.id)
+    if (current_user.has_role? "admin")
+      @mediafiles = Mediafile.all
+    else
+      @mediafiles = Mediafile.where(:user_id => current_user.id)
+    end
   end
 
    # GET /mediafiles/index.json
