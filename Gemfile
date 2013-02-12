@@ -30,6 +30,7 @@ gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
 
+gem 'json', '>= 1.7.7'
 
 
 
